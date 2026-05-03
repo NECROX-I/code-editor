@@ -27,6 +27,11 @@ export function createApp() {
   const io = new Server(httpServer, { cors: config.cors });
   setupSocketHandlers(io);
 
+  // Health check endpoint
+  app.post('/api/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  }); 
+
   // JDoodle execution proxy
   app.post('/api/execute', executeLimiter, async (req, res) => {
     const { script, language, versionIndex, stdin = '' } = req.body;

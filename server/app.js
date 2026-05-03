@@ -28,7 +28,7 @@ export function createApp() {
   setupSocketHandlers(io);
 
   // Health check endpoint
-  app.post('/api/health', (req, res) => {
+  app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   }); 
 
